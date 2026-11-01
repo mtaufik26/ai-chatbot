@@ -1,0 +1,29 @@
+{
+  "name": "gemini-chatbot-api",
+  "version": "1.0.0",
+  "description": "Chatbot berbasis Gemini 3.5 Flash dengan Node.js + Express",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "build:css": "tailwindcss -i ./src/input.css -o ./public/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./public/tailwind.css --watch"
+  },
+  "keywords": [
+    "gemini",
+    "chatbot",
+    "express"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "@google/genai": "^1.10.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
