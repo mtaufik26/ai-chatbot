@@ -1603,7 +1603,9 @@ function setGeneratingState(generating) {
     `;
     sendBtn.classList.remove('bg-zinc-800', 'text-red-400', 'border', 'border-red-500/30', 'hover:bg-zinc-700');
     sendBtn.classList.add('bg-[#fafafa]', 'text-[#09090b]', 'hover:bg-white');
-    userInput.focus();
+    if (window.innerWidth >= 768) {
+      userInput.focus();
+    }
   }
 }
 
@@ -1809,6 +1811,14 @@ function autoResizeTextarea() {
   userInput.style.height = Math.min(userInput.scrollHeight, 160) + 'px';
 }
 userInput.addEventListener('input', autoResizeTextarea);
+userInput.addEventListener('focus', () => {
+  setTimeout(() => {
+    if (window.scrollY !== 0 || window.scrollX !== 0) {
+      window.scrollTo(0, 0);
+    }
+    scrollToBottom();
+  }, 100);
+});
 
 userInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) {
@@ -2046,9 +2056,38 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ============================================================
+// VIEWPORT & RESPONSIF ENGINE UNTUK CHROME ANDROID & MOBILE BROWSERS
+// Menjamin layout 100% pas dengan visual viewport, tanpa pergeseran scroll
+// ============================================================
+function initViewportFix() {
+  const updateViewportMetrics = () => {
+    const vvh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    document.documentElement.style.setProperty('--vvh', `${vvh}px`);
+
+    // Pastikan window scroll selalu terkunci di (0, 0)
+    if (window.scrollY !== 0 || window.scrollX !== 0) {
+      window.scrollTo(0, 0);
+    }
+  };
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', updateViewportMetrics);
+    window.visualViewport.addEventListener('scroll', updateViewportMetrics);
+  }
+
+  window.addEventListener('resize', updateViewportMetrics);
+  window.addEventListener('orientationchange', () => {
+    setTimeout(updateViewportMetrics, 100);
+  });
+
+  updateViewportMetrics();
+}
+
+// ============================================================
 // INISIALISASI APLIKASI
 // ============================================================
 async function initApp() {
+  initViewportFix();
   loadSessionsFromStorage();
 
   try {
@@ -2092,7 +2131,5 @@ async function initApp() {
     updateSidebarUI();
   }
 }
-
-initApp();
 
 initApp();

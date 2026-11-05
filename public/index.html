@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark h-full w-full overflow-hidden">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content" />
   <title>ChatBot AI</title>
   <meta name="description" content="Intelligent multimodal AI ChatBot with sleek dark interface, media uploads, chat history, search, and text-to-speech." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,8 +11,8 @@
   <!-- Seluruh style dikompilasi ke Tailwind CSS v4 -->
   <link rel="stylesheet" href="tailwind.css" />
 </head>
-<body class="bg-[#09090b] text-[#f4f4f5] antialiased select-none-text overflow-hidden font-sans">
-  <div class="flex h-screen w-screen relative overflow-hidden bg-obsidian-radial" id="app-container">
+<body class="bg-[#09090b] text-[#f4f4f5] antialiased select-none-text overflow-hidden font-sans fixed inset-0 h-full w-full">
+  <div class="flex h-full w-full relative overflow-hidden bg-obsidian-radial" id="app-container">
     <!-- Backdrop Overlay untuk Mobile -->
     <div class="hidden fixed inset-0 bg-black/75 backdrop-blur-[4px] z-45 max-md:block" id="sidebar-backdrop" style="display: none;"></div>
 
@@ -57,7 +57,7 @@
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" class="text-[#71717a] shrink-0">
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
           </svg>
-          <input type="text" id="history-search-input" class="bg-transparent border-0 text-[#fafafa] text-[0.8rem] w-full outline-none font-inherit placeholder:text-[#52525b]" placeholder="Search conversations..." autocomplete="off" />
+          <input type="text" id="history-search-input" class="bg-transparent border-0 text-[#fafafa] text-[16px] md:text-[0.8rem] w-full outline-none font-inherit placeholder:text-[#52525b]" placeholder="Search conversations..." autocomplete="off" />
           <button type="button" id="history-search-clear" class="bg-transparent border-0 text-[#71717a] hover:text-[#fafafa] cursor-pointer text-[0.9rem] leading-none px-0.5" style="display: none;" title="Clear search">×</button>
         </div>
       </div>
@@ -69,7 +69,7 @@
       </div>
 
       <!-- Container List Riwayat -->
-      <div class="flex-1 overflow-y-auto px-2.5 py-1.5 flex flex-col gap-1 chat-scrollbar" id="history-list" role="navigation" aria-label="Chat History">
+      <div class="flex-1 min-h-0 overflow-y-auto px-2.5 py-1.5 flex flex-col gap-1 chat-scrollbar" id="history-list" role="navigation" aria-label="Chat History">
         <!-- Dirender secara dinamis oleh script.js -->
       </div>
 
@@ -88,7 +88,7 @@
     ============================================================ -->
     <main class="flex-1 flex flex-col h-full bg-[#09090b] relative overflow-hidden">
       <!-- Chat Header Bar -->
-      <header id="chat-header" class="h-[56px] md:h-[60px] px-2.5 sm:px-4 md:px-5 flex items-center justify-between bg-[#09090b]/80 backdrop-blur-md z-10 shrink-0 border-b border-white/[0.04] relative">
+      <header id="chat-header" class="min-h-[56px] md:min-h-[60px] h-auto px-2.5 sm:px-4 md:px-5 flex items-center justify-between flex-nowrap bg-[#09090b]/80 backdrop-blur-md z-10 shrink-0 border-b border-white/[0.04] relative">
         <div class="flex items-center gap-2 md:gap-3 min-w-0 flex-1 sm:flex-initial" id="header-left-col">
           <button type="button" class="p-1.5 text-[#a1a1aa] hover:text-[#fafafa] hover:bg-white/[0.08] rounded-[6px] transition-all cursor-pointer shrink-0" id="toggle-sidebar-btn" aria-label="Toggle Sidebar" title="Sidebar (Ctrl+B)">
             <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="toggle-sidebar-icon">
@@ -111,7 +111,7 @@
               <input 
                 type="text" 
                 id="navbar-rename-input" 
-                class="bg-[#18181b] text-[#fafafa] border border-white/20 focus:border-white/50 text-[0.84rem] md:text-[0.88rem] px-2.5 py-1 rounded-[5px] outline-none flex-1 min-w-0 font-medium"
+                class="bg-[#18181b] text-[#fafafa] border border-white/20 focus:border-white/50 text-[16px] md:text-[0.88rem] px-2.5 py-1 rounded-[5px] outline-none flex-1 min-w-0 font-medium"
                 maxlength="60"
                 autocomplete="off"
                 aria-label="Rename chat title"
@@ -141,7 +141,7 @@
         <div class="flex items-center gap-1.5 md:gap-2 shrink-0 transition-opacity duration-150" id="header-right-actions">
           <!-- Persona Selector Dropdown -->
           <div class="flex items-center bg-white/[0.04] border border-white/[0.08] rounded-[6px] px-1.5 md:px-2 py-0.5 max-w-[105px] sm:max-w-none">
-            <select id="persona" class="py-1 px-0.5 md:px-1 bg-transparent border-0 text-[0.75rem] md:text-[0.8rem] font-medium text-[#fafafa] cursor-pointer outline-none w-full truncate [&>option]:bg-[#18181b] [&>option]:text-[#fafafa]" aria-label="Select ChatBot AI Mode"></select>
+            <select id="persona" class="py-1 px-0.5 md:px-1 bg-transparent border-0 text-[16px] md:text-[0.8rem] font-medium text-[#fafafa] cursor-pointer outline-none w-full truncate [&>option]:bg-[#18181b] [&>option]:text-[#fafafa]" aria-label="Select ChatBot AI Mode"></select>
           </div>
 
           <!-- Tombol Ekspor Chat ke File Markdown -->
@@ -162,12 +162,12 @@
       </header>
 
       <!-- Kotak Pesan Obrolan (Message Stream) -->
-      <div id="chat-box" class="flex-1 overflow-y-auto px-3.5 sm:px-5 py-4 sm:py-6 flex flex-col gap-4 sm:gap-5.5 scroll-smooth chat-scrollbar" aria-live="polite">
+      <div id="chat-box" class="flex-1 min-h-0 overflow-y-auto px-3.5 sm:px-5 py-4 sm:py-6 flex flex-col gap-4 sm:gap-5.5 scroll-smooth chat-scrollbar" aria-live="polite">
         <!-- Pesan akan dirender di sini oleh JS -->
       </div>
 
       <!-- Area Input, Preview File, & Tombol Kirim -->
-      <div class="px-3 md:px-5 pt-2 md:pt-3 pb-3 md:pb-4.5 bg-[#09090b]/85 backdrop-blur-md border-t border-white/[0.08] flex flex-col gap-1.5 md:gap-2 max-w-[860px] w-full mx-auto shrink-0">
+      <div id="chat-input-container" class="px-3 md:px-5 pt-2 md:pt-3 pb-3 md:pb-4.5 bg-[#09090b]/85 backdrop-blur-md border-t border-white/[0.08] flex flex-col gap-1.5 md:gap-2 max-w-[860px] w-full mx-auto shrink-0">
         <!-- Floating Preview Lampiran yang Siap Kirim -->
         <div class="flex items-center gap-3 p-[8px_14px] bg-[#18181b] border border-white/[0.12] rounded-[10px] max-w-[380px] shadow-lg animate-slide-up" id="file-preview-card" style="display: none;">
           <div class="text-[1.4rem] leading-none" id="file-preview-icon">📄</div>
@@ -284,7 +284,7 @@
 
           <textarea 
             id="user-input" 
-            class="flex-1 bg-transparent border-0 outline-none font-inherit text-[0.88rem] md:text-[0.94rem] text-[#fafafa] resize-none max-h-[140px] md:max-h-[160px] min-h-[22px] md:min-h-[24px] leading-relaxed py-1 md:py-1.5 placeholder:text-[#52525b]"
+            class="flex-1 bg-transparent border-0 outline-none font-inherit text-[16px] md:text-[0.94rem] text-[#fafafa] resize-none max-h-[140px] md:max-h-[160px] min-h-[22px] md:min-h-[24px] leading-relaxed py-1 md:py-1.5 placeholder:text-[#52525b]"
             placeholder="Ask anything or upload a file..." 
             rows="1" 
             autocomplete="off"
@@ -353,7 +353,7 @@
     </div>
 
     <!-- Toast Notifikasi Ringan -->
-    <div class="fixed bottom-6 right-6 z-[150] flex flex-col gap-2 pointer-events-none" id="toast-container"></div>
+    <div class="fixed bottom-6 right-6 max-sm:bottom-4 max-sm:right-4 max-sm:left-4 max-sm:items-center z-[150] flex flex-col gap-2 pointer-events-none" id="toast-container"></div>
   </div>
 
   <!-- CDN Marked.js untuk render Markdown yang kaya -->
